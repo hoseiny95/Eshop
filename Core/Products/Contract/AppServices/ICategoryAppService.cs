@@ -11,7 +11,7 @@ namespace App.Domain.Core.Product.Contract.AppServices
     {
         Task<int> Add(CategoryInputDto categoryInputDto, CancellationToken cancellationToken);
         Task<int> Update(int id, CategoryInputDto categoryInputDto, CancellationToken cancellationToken);
-        Task<bool> Delete(CategoryOutputDto category, CancellationToken cancellationToken);
+        Task<bool> Delete(int id, CancellationToken cancellationToken);
         Task<CategoryOutputDto> GetById(int id, CancellationToken cancellationToken);
         Task<List<CategoryOutputDto>> GetAll(CancellationToken cancellationToken);
     }

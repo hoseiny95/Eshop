@@ -3,7 +3,7 @@ using App.Domain.Core.Product.Contract.AppServices;
 using App.Domain.Core.Product.Contract.Repositories;
 using App.Domain.Core.Product.Contract.Services;
 using App.Domain.Services.Product;
-using App.Infra.Data.Repos.Ef.Product;
+using App.Infra.Data.Repos.Ef.Products;
 using App.Infra.Data.SqlServer.Ef.Models;
 
 var builder = WebApplication.CreateBuilder(args);
