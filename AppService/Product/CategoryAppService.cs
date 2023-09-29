@@ -26,5 +26,25 @@ namespace App.Domain.AppServices.Product
         {
             return await _categoryService.Add(categoryInputDto, cancellationToken);
         }
+
+        public async Task<bool> Delete(int id, CancellationToken cancellationToken)
+        {
+            return await _categoryService.Delete(id, cancellationToken);
+        }
+
+        public async Task<List<CategoryOutputDto>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _categoryService.GetAll(cancellationToken);
+        }
+
+        public async Task<CategoryOutputDto> GetById(int id, CancellationToken cancellationToken)
+        {
+            return await _categoryService.GetById(id, cancellationToken);
+        }
+
+        public async Task<int> Update(int id, CategoryInputDto categoryInputDto, CancellationToken cancellationToken)
+        {
+            return await _categoryService.Update(id, categoryInputDto, cancellationToken);
+        }
     }
 }

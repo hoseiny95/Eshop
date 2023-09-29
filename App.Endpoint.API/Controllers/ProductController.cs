@@ -22,5 +22,31 @@ namespace App.Endpoint.API.Controllers
         {
             return Ok(await _categoryAppService.Add(categoryInputDto, cancellationToken));
         }
+
+        [HttpGet ("GetAllCategory")]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            return Ok(await _categoryAppService.GetAll(cancellationToken));
+        }
+
+        [HttpGet ("GetByIdCategory")]
+        public async Task<IActionResult> GetById(int id , CancellationToken cancellationToken)
+        {
+            return Ok(await _categoryAppService.GetById(id, cancellationToken));
+        }
+
+
+        [HttpPut ("UpdateCategory")]
+        public async Task<IActionResult> Update(int id ,CategoryInputDto categoryInput, CancellationToken cancellationToken)
+        {
+            return Ok(await _categoryAppService.Update(id, categoryInput, cancellationToken));
+        }
+
+
+        [HttpDelete("DeleteCategory")]
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+        {
+            return Ok(await _categoryAppService.Delete(id, cancellationToken));
+        }
     }
 }
