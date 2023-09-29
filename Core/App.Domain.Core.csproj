@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Product\Contract\AppServices\" />
-    <Folder Include="Product\Contract\Repositories\" />
-    <Folder Include="Product\Contract\Services\" />
-    <Folder Include="Product\Dtos\" />
     <Folder Include="User\Contract\AppServices\" />
     <Folder Include="User\Contract\Repositories\" />
     <Folder Include="User\Contract\Services\" />

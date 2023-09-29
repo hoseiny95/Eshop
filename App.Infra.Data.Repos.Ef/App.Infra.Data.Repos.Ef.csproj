@@ -10,4 +10,13 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\App.Infra.Data.SqlServer.Ef\App.Infra.Data.SqlServer.Ef.csproj" />
+    <ProjectReference Include="..\Core\App.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>
