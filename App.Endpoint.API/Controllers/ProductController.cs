@@ -1,6 +1,6 @@
-﻿using App.Domain.AppServices.Product;
-using App.Domain.Core.Product.Contract.AppServices;
-using App.Domain.Core.Product.Dtos;
+﻿using App.Domain.AppServices.Products;
+using App.Domain.Core.Products.Contract.AppServices;
+using App.Domain.Core.Products.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

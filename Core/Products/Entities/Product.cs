@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace App.Domain.Core.Product.Entities;
+namespace App.Domain.Core.Products.Entities;
 
 public partial class Product
 {
@@ -12,6 +12,7 @@ public partial class Product
     public string? Title { get; set; }
 
     public int CalculatedQty { get; set; }
+    public bool IsRemoved { get; set; } = false;
 
     public virtual Category? Category { get; set; }
 

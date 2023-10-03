@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.Product.Dtos
+namespace App.Domain.Core.Products.Dtos
 {
     public class CategoryInputDto
     {

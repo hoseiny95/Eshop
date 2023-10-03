@@ -1,14 +1,14 @@
-﻿using App.Domain.Core.Product.Contract.Repositories;
-using App.Domain.Core.Product.Contract.Services;
-using App.Domain.Core.Product.Dtos;
-using App.Domain.Core.Product.Entities;
+﻿using App.Domain.Core.Products.Contract.Repositories;
+using App.Domain.Core.Products.Contract.Services;
+using App.Domain.Core.Products.Dtos;
+using App.Domain.Core.Products.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Services.Product
+namespace App.Domain.Services.Products
 {
     public class CategoryService : ICategoryService
     {

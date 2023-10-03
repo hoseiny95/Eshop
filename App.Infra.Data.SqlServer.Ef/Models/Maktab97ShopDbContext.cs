@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using App.Domain.Core.Product.Entities;
+using App.Domain.Core.Products.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Infra.Data.SqlServer.Ef.Models;

@@ -1,8 +1,8 @@
-using App.Domain.AppServices.Product;
-using App.Domain.Core.Product.Contract.AppServices;
-using App.Domain.Core.Product.Contract.Repositories;
-using App.Domain.Core.Product.Contract.Services;
-using App.Domain.Services.Product;
+using App.Domain.AppServices.Products;
+using App.Domain.Core.Products.Contract.AppServices;
+using App.Domain.Core.Products.Contract.Repositories;
+using App.Domain.Core.Products.Contract.Services;
+using App.Domain.Services.Products;
 using App.Infra.Data.Repos.Ef.Products;
 using App.Infra.Data.SqlServer.Ef.Models;
 
@@ -18,6 +18,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductAppService, ProductAppService>();
 
 builder.Services.AddDbContext<Maktab97ShopDbContext>();
 

@@ -1,11 +1,11 @@
-﻿using App.Domain.Core.Product.Dtos;
+﻿using App.Domain.Core.Products.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.Product.Contract.AppServices
+namespace App.Domain.Core.Products.Contract.AppServices
 {
     public interface ICategoryAppService
     {

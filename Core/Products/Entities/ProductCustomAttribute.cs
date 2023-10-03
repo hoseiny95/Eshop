@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace App.Domain.Core.Product.Entities;
+namespace App.Domain.Core.Products.Entities;
 
 public partial class ProductCustomAttribute
 {

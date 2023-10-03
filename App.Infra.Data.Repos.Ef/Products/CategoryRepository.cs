@@ -1,6 +1,6 @@
-﻿using App.Domain.Core.Product.Contract.Repositories;
-using App.Domain.Core.Product.Dtos;
-using App.Domain.Core.Product.Entities;
+﻿using App.Domain.Core.Products.Contract.Repositories;
+using App.Domain.Core.Products.Dtos;
+using App.Domain.Core.Products.Entities;
 using App.Infra.Data.SqlServer.Ef.Models;
 using Microsoft.EntityFrameworkCore;
 
