@@ -24,6 +24,10 @@ builder.Services.AddScoped<IProductAppService, ProductAppService>();
 
 builder.Services.AddDbContext<Maktab97ShopDbContext>();
 
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
