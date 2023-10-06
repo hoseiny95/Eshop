@@ -21,12 +21,17 @@ namespace App.Infra.Data.Repos.Ef.User
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        private JwtSecurityToken GetToken(int userId)
+        private JwtSecurityToken GetToken(int userId, Role role)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("salamll08909767855677575ff"));
-            var clamsList = new List<Claim> { new Claim("id", userId.ToString()) };
+            var clamsList = new List<Claim>
+            {
+                new Claim("id", userId.ToString()),
+                new Claim (ClaimTypes.Role, role.Name),
+            };
             var token = new JwtSecurityToken(
                 issuer: "ESop",
+                audience:"hello",
                 expires: DateTime.Now.AddMinutes(30),
                 claims: clamsList,
                 signingCredentials : new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
@@ -38,10 +43,11 @@ namespace App.Infra.Data.Repos.Ef.User
             var user =await _userManager.FindByNameAsync(Dto.Username);
             if (user != null)
             {
+                //var res = await _signInManager.CheckPasswordSignInAsync(user, Dto.Password, false);
                 var res =await _userManager.CheckPasswordAsync(user, Dto.Password);
                 if (res)
                 {
-                    var token =  GetToken(user.Id);
+                    var token =  GetToken(user.Id, Dto.Username);
                     var tk = new JwtSecurityTokenHandler().WriteToken(token);
                     return tk;
                 }
@@ -57,7 +63,8 @@ namespace App.Infra.Data.Repos.Ef.User
                 PasswordHash = inputDto.Password,
                 UserName = inputDto.Username
             };
-            var result = await _userManager.CreateAsync(user);
+            var result = await _userManager.CreateAsync(user, inputDto.Password);
+            
             if (result.Succeeded)
             {
                 var token =GetToken(user.Id);

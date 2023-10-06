@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.Users.Contract.AppServices;
 using App.Domain.Core.Users.Contract.Services;
 using App.Domain.Core.Users.Dtos;
+using App.Domain.Core.Users.Entities;
 
 namespace App.Domain.AppServices.User
 {
@@ -11,6 +12,13 @@ namespace App.Domain.AppServices.User
         public UserAppService(IUserServise userServise)
         {
             _userServise = userServise;
+        }
+
+        public Task<List<Permission>> GetPermissionsByRoleId(int id)
+        {
+            
+            _userServise.GetPermissionsByRoleId(id);
+            throw new NotImplementedException();
         }
 
         public async Task<string> Login(LoginDto dto)

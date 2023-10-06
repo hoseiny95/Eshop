@@ -1,9 +1,6 @@
 ﻿using App.Domain.Core.Users.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using App.Domain.Core.Users.Entities;
+
 
 namespace App.Domain.Core.Users.Contract.Services
 {
@@ -11,5 +8,6 @@ namespace App.Domain.Core.Users.Contract.Services
     {
         Task<string> Login(LoginDto dto);
         Task<string> Register(RegisterInputDto dto);
+        Task<bool> CheckPermissionByRoleId(int id, CancellationToken cancellation, string permission);
     }
 }

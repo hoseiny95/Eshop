@@ -3,6 +3,7 @@ using App.Domain.Core.Products.Contract.AppServices;
 using App.Domain.Core.Products.Dtos;
 using App.Domain.Core.Users.Contract.AppServices;
 using App.Domain.Core.Users.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,15 +14,20 @@ namespace App.Endpoint.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class ProductController : ControllerBase
     {
         private readonly ICategoryAppService _categoryAppService;
+        private readonly IHttpContextAccessor _contextAccessor;
         private readonly IUserAppServies _userAppServies;
 
-        public ProductController(ICategoryAppService categoryAppService,IUserAppServies userAppServies)
+        public ProductController(ICategoryAppService categoryAppService,
+                                    IUserAppServies userAppServies,
+                                    IHttpContextAccessor contextAccessor)
         {
             _userAppServies = userAppServies;
             _categoryAppService = categoryAppService;
+            _contextAccessor = contextAccessor;
 
         }
 
@@ -50,6 +56,7 @@ namespace App.Endpoint.API.Controllers
         }
 
         [HttpGet ("GetAllCategory")]
+        
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             return Ok(await _categoryAppService.GetAll(cancellationToken));
@@ -72,6 +79,7 @@ namespace App.Endpoint.API.Controllers
         [HttpDelete("DeleteCategory")]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
+           // _contextAccessor.HttpContext.User.Claims.FirstOrDefault(i => i.)
             return Ok(await _categoryAppService.Delete(id, cancellationToken));
         }
     }

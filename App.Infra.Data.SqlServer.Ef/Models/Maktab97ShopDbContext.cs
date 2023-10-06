@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Infra.Data.SqlServer.Ef.Models;
 
-public partial class Maktab97ShopDbContext : IdentityDbContext<ApplicationUser,IdentityRole<int>,int>
+public partial class Maktab97ShopDbContext : IdentityDbContext<ApplicationUser,Role,int>
 {
     public Maktab97ShopDbContext()
     {
@@ -19,6 +19,8 @@ public partial class Maktab97ShopDbContext : IdentityDbContext<ApplicationUser,I
     {
     }
     public DbSet<ApplicationUser> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Permission> Permissions { get; set; }
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<CustomAttributeTemplate> CustomAttributeTemplates { get; set; }
@@ -39,7 +41,7 @@ public partial class Maktab97ShopDbContext : IdentityDbContext<ApplicationUser,I
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=Maktab97_ShopDb;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=.;Database=Maktab97_ShopDb;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

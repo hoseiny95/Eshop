@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infra.Data.SqlServer.Ef.Migrations
 {
     [DbContext(typeof(Maktab97ShopDbContext))]
-    [Migration("20231006090130_init")]
+    [Migration("20231006104803_init")]
     partial class init
     {
         /// <inheritdoc />

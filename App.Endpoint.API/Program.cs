@@ -38,9 +38,11 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddDbContext<Maktab97ShopDbContext>();
 
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>()
+builder.Services.AddIdentity<ApplicationUser, Role>()
             .AddEntityFrameworkStores<Maktab97ShopDbContext>()
+            .AddRoles<Role>()
             .AddDefaultTokenProviders();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      .AddCookie()
      .AddJwtBearer(jwtBearerOptions =>
@@ -48,10 +50,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
          jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
          {
              ValidateActor = false,
-             ValidateAudience = false,
+             ValidateAudience = true,
              ValidateLifetime = true,
              ValidateIssuerSigningKey = true,
              ValidIssuer = "ESop",
+             ValidAudience = "hello",
              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
                  ("salamll08909767855677575ff"))
          };
@@ -122,10 +125,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
