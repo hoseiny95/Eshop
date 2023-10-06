@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using App.Domain.Core.Products.Entities;
+using App.Domain.Core.Users.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Infra.Data.SqlServer.Ef.Models;
 
-public partial class Maktab97ShopDbContext : DbContext
+public partial class Maktab97ShopDbContext : IdentityDbContext<ApplicationUser,IdentityRole<int>,int>
 {
     public Maktab97ShopDbContext()
     {
@@ -15,7 +18,7 @@ public partial class Maktab97ShopDbContext : DbContext
         : base(options)
     {
     }
-
+    public DbSet<ApplicationUser> Users { get; set; }
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<CustomAttributeTemplate> CustomAttributeTemplates { get; set; }
@@ -134,6 +137,7 @@ public partial class Maktab97ShopDbContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
