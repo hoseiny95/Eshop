@@ -1,14 +1,18 @@
+using App.Domain.AppServices;
 using App.Domain.AppServices.Products;
 using App.Domain.AppServices.User;
 using App.Domain.Core.Products.Contract.AppServices;
 using App.Domain.Core.Products.Contract.Repositories;
 using App.Domain.Core.Products.Contract.Services;
 using App.Domain.Core.Users.Contract.AppServices;
+using App.Domain.Core.Users.Contract.Manager;
 using App.Domain.Core.Users.Contract.Repositories;
 using App.Domain.Core.Users.Contract.Services;
 using App.Domain.Core.Users.Entities;
+using App.Domain.Services;
 using App.Domain.Services.Products;
 using App.Domain.Services.User;
+using App.Infra.Data.Repos.Ef;
 using App.Infra.Data.Repos.Ef.Products;
 using App.Infra.Data.Repos.Ef.User;
 using App.Infra.Data.SqlServer.Ef.Models;
@@ -26,22 +30,20 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductAppService, ProductAppService>();
-builder.Services.AddScoped<IUserServise, UserService>();
-builder.Services.AddScoped<IUserAppServies, UserAppService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddInfrastructure();
+builder.Services.AddServices();
+builder.Services.AddAppServices();
+
+
 builder.Services.AddDbContext<Maktab97ShopDbContext>();
 
 
 builder.Services.AddIdentity<ApplicationUser, Role>()
             .AddEntityFrameworkStores<Maktab97ShopDbContext>()
+            .AddUserManager<AppUserManager>()
             .AddRoles<Role>()
             .AddDefaultTokenProviders();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      .AddCookie()

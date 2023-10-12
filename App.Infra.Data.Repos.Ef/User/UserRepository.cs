@@ -14,20 +14,22 @@ namespace App.Infra.Data.Repos.Ef.User
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<Role> _roleManager;
 
 
-        public UserRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public UserRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
-        private JwtSecurityToken GetToken(int userId, Role role)
+        private JwtSecurityToken GetToken(int userId)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("salamll08909767855677575ff"));
             var clamsList = new List<Claim>
             {
                 new Claim("id", userId.ToString()),
-                new Claim (ClaimTypes.Role, role.Name),
+                //new Claim (ClaimTypes.Role, role.Name),
             };
             var token = new JwtSecurityToken(
                 issuer: "ESop",
@@ -43,11 +45,13 @@ namespace App.Infra.Data.Repos.Ef.User
             var user =await _userManager.FindByNameAsync(Dto.Username);
             if (user != null)
             {
+                var roles = await _userManager.GetRolesAsync(user);
+                
                 //var res = await _signInManager.CheckPasswordSignInAsync(user, Dto.Password, false);
                 var res =await _userManager.CheckPasswordAsync(user, Dto.Password);
                 if (res)
                 {
-                    var token =  GetToken(user.Id, Dto.Username);
+                    var token =  GetToken(user.Id);
                     var tk = new JwtSecurityTokenHandler().WriteToken(token);
                     return tk;
                 }
