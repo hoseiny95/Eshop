@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Infra.Data.Repos.Ef.UOW
+namespace App.Domain.Core.Users.Contract.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {
@@ -27,6 +27,8 @@ namespace App.Infra.Data.Repos.Ef.UOW
 
         IProductPriceRepository ProductPrices { get; }
         Task<int> SavechangesAsync();
+
+        IRoleRepository RoleRepository {get;}
 
     }
 }

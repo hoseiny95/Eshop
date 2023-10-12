@@ -24,5 +24,11 @@ public class RoleRepository : IRoleRepository
         return permissions;
     }
 
-
+    public async Task<List<Role>> GetRolesByUserId(int userId)
+    {
+       var roles = await _context.Users.Where(u => u.Id == userId).Include(u => u.Roles).SelectMany(r => r.Roles).ToListAsync();
+       
+                                 
+        return roles;
+    }
 }

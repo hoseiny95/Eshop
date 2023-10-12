@@ -9,6 +9,6 @@ namespace App.Domain.Core.Users.Entities
 {
     public class ApplicationUser : IdentityUser<int>
     {
-        
+        public List<Role> Roles { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using App.Domain.Core.Products.Contract.Repositories;
+using App.Domain.Core.Users.Contract.Repositories;
 using App.Infra.Data.Repos.Ef.Products;
+using App.Infra.Data.Repos.Ef.User;
 using App.Infra.Data.SqlServer.Ef.Models;
 using AutoMapper;
 using System;
@@ -32,6 +34,9 @@ namespace App.Infra.Data.Repos.Ef.UOW
 
         public IProductPriceRepository ProductPrices { get; }
 
+        //public IRoleRepository RoleRepository => throw new NotImplementedException();
+        public IRoleRepository RoleRepository { get; }
+
         public UnitOfWork(Maktab97ShopDbContext dbContext ,IMapper mapper)
         {
             _dbContext = dbContext;
@@ -39,6 +44,7 @@ namespace App.Infra.Data.Repos.Ef.UOW
             Orders = new OrderRepository(mapper,_dbContext);
             CustomAttributes = new CustomAttributeTemplateRepository(mapper,_dbContext);
             Categories = new CategoryRepository(_dbContext);
+            RoleRepository = new RoleRepository(_dbContext);
         }
         public void Dispose() => _dbContext.Dispose();
 

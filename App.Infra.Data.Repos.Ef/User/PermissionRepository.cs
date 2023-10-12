@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Users.Contract.Repositories;
 using App.Domain.Core.Users.Entities;
+using App.Infra.Data.SqlServer.Ef.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace App.Infra.Data.Repos.Ef.User
     public class PermissionRepository : BaseRepository<Permission>, IPermissionRepository
     {
         private readonly IQueryable<Permission> _queryable;
-        protected PermissionRepository(DbContext dbContext) : base(dbContext)
+        public PermissionRepository(Maktab97ShopDbContext dbContext) : base(dbContext)
         {
         }
 

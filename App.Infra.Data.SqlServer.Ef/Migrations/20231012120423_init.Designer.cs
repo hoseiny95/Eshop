@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infra.Data.SqlServer.Ef.Migrations
 {
     [DbContext(typeof(Maktab97ShopDbContext))]
-    [Migration("20231012060901_init")]
+    [Migration("20231012120423_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -351,6 +351,9 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ApplicationUserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -364,6 +367,8 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -582,6 +587,13 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("App.Domain.Core.Users.Entities.Role", b =>
+                {
+                    b.HasOne("App.Domain.Core.Users.Entities.ApplicationUser", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("App.Domain.Core.Users.Entities.Role", null)
@@ -679,6 +691,11 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                     b.Navigation("ProductInventories");
 
                     b.Navigation("ProductPrices");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Users.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }
