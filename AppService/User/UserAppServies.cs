@@ -17,7 +17,7 @@ namespace App.Domain.AppServices.User
         public Task<List<Permission>> GetPermissionsByRoleId(int id)
         {
             
-            _userServise.GetPermissionsByRoleId(id);
+            //_userServise.GetPermissionsByRoleId(id);
             throw new NotImplementedException();
         }
 

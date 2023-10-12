@@ -21,8 +21,8 @@ namespace App.Domain.AppServices.Products
         private readonly IUserServise _userService;
 
         public CategoryAppService(ICategoryService categoryService
-                                    , IUserServise userService, 
-                                    UserManager<> userManager)
+                                    , IUserServise userService
+                                    )
         {
             _categoryService = categoryService;
             _userService = userService;
@@ -36,7 +36,7 @@ namespace App.Domain.AppServices.Products
         public async Task<bool> Delete(int id, CancellationToken cancellationToken)
         {
           
-            _userService.CheckPermissionByRoleId(, cancellationToken, "Deleted");
+            //_userService.CheckPermissionByRoleId(, cancellationToken, "Deleted");
             return await _categoryService.Delete(id, cancellationToken);
         }
 

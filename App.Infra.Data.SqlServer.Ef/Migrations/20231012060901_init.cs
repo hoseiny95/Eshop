@@ -80,6 +80,19 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -246,6 +259,30 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PermissionRole",
+                columns: table => new
+                {
+                    PermissionsId = table.Column<int>(type: "int", nullable: false),
+                    RolesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PermissionRole", x => new { x.PermissionsId, x.RolesId });
+                    table.ForeignKey(
+                        name: "FK_PermissionRole_AspNetRoles_RolesId",
+                        column: x => x.RolesId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PermissionRole_Permissions_PermissionsId",
+                        column: x => x.PermissionsId,
+                        principalTable: "Permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductCustomAttributes",
                 columns: table => new
                 {
@@ -400,6 +437,11 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PermissionRole_RolesId",
+                table: "PermissionRole",
+                column: "RolesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductCustomAttributes_AttributeId",
                 table: "ProductCustomAttributes",
                 column: "AttributeId");
@@ -447,6 +489,9 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                 name: "OrderLines");
 
             migrationBuilder.DropTable(
+                name: "PermissionRole");
+
+            migrationBuilder.DropTable(
                 name: "ProductCustomAttributes");
 
             migrationBuilder.DropTable(
@@ -456,13 +501,16 @@ namespace App.Infra.Data.SqlServer.Ef.Migrations
                 name: "ProductPrices");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Permissions");
 
             migrationBuilder.DropTable(
                 name: "CustomAttributeTemplates");
