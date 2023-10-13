@@ -16,7 +16,7 @@ public class RoleRepository : IRoleRepository
     {
         _context = context;
     }
-    public async Task<List<Permission>> GetPermissionsByRoleId(int id, CancellationToken cancellation)
+    public async Task<List<Permission>> GetPermissionsByRoleId(int id, CancellationToken cancellation = default)
     {
         var permissions = await _context.Roles.Where(i => i.Id == id)
                             .Include(i => i.Permissions)

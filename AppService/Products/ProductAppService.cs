@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Products.Contract.AppServices;
+﻿using App.Domain.AppServices.AttributePermission;
+using App.Domain.Core.Products.Contract.AppServices;
 using App.Domain.Core.Products.Contract.Services;
 using App.Domain.Core.Products.Dtos;
 using System;
@@ -77,6 +78,7 @@ namespace App.Domain.AppServices.Products
                 Messeage = msg
             };
         }
+        [TestAttribute(new[] { PermissionEnum.Rights.DELETE })]
 
         public async Task<List<ProductOutputDto>> GetAll(CancellationToken cancellationToken)
         {

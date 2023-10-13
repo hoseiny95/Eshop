@@ -14,10 +14,15 @@ namespace App.Domain.AppServices.User
             _userServise = userServise;
         }
 
+        public async Task<bool> CheckPermissionsByRoleId(int id, CancellationToken cancellation,
+                                                    string permission)
+        {
+
+            return await _userServise.CheckPermissionByRoleId(id, cancellation, permission);
+        }
+
         public Task<List<Permission>> GetPermissionsByRoleId(int id)
         {
-            
-            //_userServise.GetPermissionsByRoleId(id);
             throw new NotImplementedException();
         }
 

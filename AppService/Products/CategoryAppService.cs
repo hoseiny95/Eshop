@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Products.Contract.AppServices;
+﻿using App.Domain.AppServices.AttributePermission;
+using App.Domain.Core.Products.Contract.AppServices;
 using App.Domain.Core.Products.Contract.Repositories;
 using App.Domain.Core.Products.Contract.Services;
 using App.Domain.Core.Products.Dtos;
@@ -39,7 +40,7 @@ namespace App.Domain.AppServices.Products
             //_userService.CheckPermissionByRoleId(, cancellationToken, "Deleted");
             return await _categoryService.Delete(id, cancellationToken);
         }
-
+       
         public async Task<List<CategoryOutputDto>> GetAll(CancellationToken cancellationToken)
         {
             return await _categoryService.GetAll(cancellationToken);

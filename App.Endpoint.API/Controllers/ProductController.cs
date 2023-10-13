@@ -1,4 +1,5 @@
-﻿using App.Domain.AppServices.Products;
+﻿using App.Domain.AppServices.AttributePermission;
+using App.Domain.AppServices.Products;
 using App.Domain.Core.Products.Contract.AppServices;
 using App.Domain.Core.Products.Dtos;
 using App.Domain.Core.Users.Contract.AppServices;
@@ -15,6 +16,7 @@ namespace App.Endpoint.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer")]
+    [AllowAnonymous]
     public class ProductController : ControllerBase
     {
         private readonly ICategoryAppService _categoryAppService;
@@ -56,7 +58,7 @@ namespace App.Endpoint.API.Controllers
         }
 
         [HttpGet ("GetAllCategory")]
-        
+        [TestAttribute(new[] { PermissionEnum.Rights.EDIT })]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             return Ok(await _categoryAppService.GetAll(cancellationToken));

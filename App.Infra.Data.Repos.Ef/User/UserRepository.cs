@@ -28,7 +28,7 @@ namespace App.Infra.Data.Repos.Ef.User
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("salamll08909767855677575ff"));
             var clamsList = new List<Claim>
             {
-                new Claim("id", userId.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 //new Claim (ClaimTypes.Role, role.Name),
             };
             var token = new JwtSecurityToken(
