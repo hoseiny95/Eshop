@@ -7,6 +7,7 @@ using App.Domain.Core.Users.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLog.Fluent;
 
 //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJleHAiOjE2OTY1ODY2NDIsImlzcyI6IkVTb3AifQ.WDYSdvLNazAeiYxZoayWK00Kr8eN1FTJCFmdJHypPwY
 
@@ -21,16 +22,18 @@ namespace App.Endpoint.API.Controllers
     {
         private readonly ICategoryAppService _categoryAppService;
         private readonly IHttpContextAccessor _contextAccessor;
+        private readonly ILogger<ProductController> _logger;
         private readonly IUserAppServies _userAppServies;
 
         public ProductController(ICategoryAppService categoryAppService,
                                     IUserAppServies userAppServies,
-                                    IHttpContextAccessor contextAccessor)
+                                    IHttpContextAccessor contextAccessor,
+                                    ILogger<ProductController> logger)
         {
             _userAppServies = userAppServies;
             _categoryAppService = categoryAppService;
             _contextAccessor = contextAccessor;
-
+            _logger = logger;
         }
 
         [HttpPost ("Register")]
@@ -43,9 +46,9 @@ namespace App.Endpoint.API.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
-            var h = HttpContext.Request.Headers;
-            var y = HttpContext.User.Identity.IsAuthenticated;
-            var x = HttpContext.User.Identity.Name;
+            //var h = HttpContext.Request.Headers;
+            //var y = HttpContext.User.Identity.IsAuthenticated;
+            //var x = HttpContext.User.Identity.Name;
             var token =await _userAppServies.Login(dto);
             return Ok(token);
         }
@@ -54,6 +57,8 @@ namespace App.Endpoint.API.Controllers
         [HttpPost ("AddCategory")]
         public async Task<IActionResult> Add(CategoryInputDto categoryInputDto, CancellationToken cancellationToken)
         {
+            _logger.LogError("this id an arror");
+            _logger.LogInformation("Hello, world!");
             return Ok(await _categoryAppService.Add(categoryInputDto, cancellationToken));
         }
 
